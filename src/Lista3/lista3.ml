@@ -33,25 +33,38 @@ insertionsort (<) ["zs"; "ab1"; "dc"; "cd"] =  ["ab1"; "cd"; "dc"; "zs"];;
 insertionsort (fun (x1, y1) (x2, y2) -> x1 < x2) [(6, 2); (6, 3); (4, 2); (1, 3); (1, 2)] = [(1, 3); (1, 2); (4, 2); (6, 2); (6, 3)];;
 insertionsort (fun (x1, y1) (x2, y2) -> x1 < x2) [(6, 3); (6, 2); (1, 2); (4, 2); (1, 3)] = [(1, 2); (1, 3); (4, 2); (6, 3); (6, 2)];;
 (* b *)
+
+
+let rec halfsplit xs =
+    match xs with
+    | [] -> ([], [])
+    | h1 :: h2 :: t -> let (l1, l2) = halfsplit t in (h1 :: l1, h2 :: l2)
+    | h :: [] -> ([h], []);;
+
+let rec merge pred (xs, ys) =
+    match (xs, ys) with
+    | (xs, []) -> xs
+    | ([], ys) -> ys
+    | (h1 :: t1, h2 :: t2) -> if pred h1 h2 then h1 :: merge pred (t1, ys)
+                              else h2 :: merge pred (xs, t2);;
 let rec mergesort pred xs =
     match xs with
         | [] -> []
         | [x] -> [x]
-        | h :: t as l1 -> let (h1, h2) = halfsplit l1 in merge pred (mergesort h1, mergesort h2)
-
-and halfsplit xs =
-    match xs with
-    | [] -> ([], [])
-    | h :: t -> let (h1, h2) = halfsplit t in (h :: h2, h1)
-
-and merge pred (xs, ys) =
-    match (xs, ys) with
-    | (xs, []) -> xs
-    | ([], ys) -> ys
-    | (h1 :: t1 as l1, h2 :: t2 as l2) -> if pred h1 h2 then h1 :: merge (t1, l2)
-                                          else h2 :: merge (l1, t2);;
+        | h :: t as l1 -> let (h1, h2) = halfsplit l1 in merge pred (mergesort pred h1, mergesort pred h2);;
 
 
+mergesort (<) [5; 4; 4; 2; 5; 3] = [2; 3; 4; 4; 5; 5];;
+mergesort (<) ["zs"; "ab1"; "dc"; "cd"] =  ["ab1"; "cd"; "dc"; "zs"];;
+mergesort (fun (x1, y1) (x2, y2) -> x1 <= x2) [(6, 2); (6, 3); (4, 2); (1, 3); (1, 2)] = [(1, 3); (1, 2); (4, 2); (6, 2); (6, 3)];;
+mergesort (fun (x1, y1) (x2, y2) -> x1 <= x2) [(6, 3); (6, 2); (1, 2); (4, 2); (1, 3)] = [(1, 2); (1, 3); (4, 2); (6, 3); (6, 2)];;
+
+[(6,2), (4,2), (1,2)] [(6,3), (1,3)]
+[(6,2), (4,2)] [(1,2)], [(6,3)], [(1,3)]
+[(6, 2)], [(4, 2)], [(1, 2)], [(6,3)], [(1,3)]
+[(4, 2), (6,2)], [(1, 2)], [(1,3), (6,3)]
+[(1, 2), (4,2), (6,2)], [(1,3), (6,3)]
+[(1, 2), (1,3), (4, 2), (6,2), (6,3)]
 
 
 
