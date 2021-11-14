@@ -13,7 +13,6 @@ let rec ltake = function
     | (n, LCons (x, lazy xs)) -> x :: ltake (n-1, xs);;
 
 (* Zadanie 1 *)
-
 let lrepeat k xs =
     let rec lrepeat_iter n ys =
     match n, ys with
@@ -33,23 +32,24 @@ let lfib =
 
 ltake(12, lfib) = [0; 1; 1; 2; 3; 5; 8; 13; 21; 34; 55; 89];;
 ltake(2, lfib) = [0; 1];;
+ltake(0, lfib) = [0];;
 ltake(0, lfib) = [];;
 
 (* Zadanie 3 *)
 type 'a lBT = LEmpty | LNode of 'a * (unit -> 'a lBT) * (unit -> 'a lBT);;
 
 (* a *)
-let lBreath lbt =
-    let rec lBreath_iter = function
+let lBreadth lbt =
+    let rec lBreadth_iter = function
         | LEmpty :: t -> LNil
-        | LNode (x, lLT, lRT) :: t -> LCons(x, lazy (lBreath_iter (t @ [lLT(); lRT()])))
-    in lBreath_iter [lbt];;
+        | LNode (x, lLT, lRT) :: t -> LCons(x, lazy (lBreadth_iter (t @ [lLT(); lRT()])))
+    in lBreadth_iter [lbt];;
 
 (* b *)
 let rec lTree n = LNode (n, (function () -> lTree (2 * n)), (function () -> lTree (2 * n + 1)));;
 
 
-ltake (20, lBreath (lTree 1)) = [1; 2; 3; 4; 5; 6; 7; 8; 9; 10; 11; 12; 13; 14; 15; 16; 17; 18; 19; 20];;
-ltake (20, lBreath LEmpty) = [];;
+ltake (20, lBreadth (lTree 1)) = [1; 2; 3; 4; 5; 6; 7; 8; 9; 10; 11; 12; 13; 14; 15; 16; 17; 18; 19; 20];;
+ltake (20, lBreadth LEmpty) = [];;
 
 
