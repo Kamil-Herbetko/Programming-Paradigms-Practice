@@ -32,7 +32,7 @@ let lfib =
 
 ltake(12, lfib) = [0; 1; 1; 2; 3; 5; 8; 13; 21; 34; 55; 89];;
 ltake(2, lfib) = [0; 1];;
-ltake(0, lfib) = [0];;
+ltake(1, lfib) = [0];;
 ltake(0, lfib) = [];;
 
 (* Zadanie 3 *)
