@@ -43,8 +43,11 @@ def quick(tab: Array[Int])(l: Int)(r: Int): Unit =
 // (d
 def quicksort(tab: Array[Int]) = quick(tab)(0)(tab.length - 1)
 
-val t1 = Array.tabulate(10)(_ => Random.nextInt(15))
-
+val t1 = Array(4, 8, 1, 12, 7, 3, 1, 9)
 quicksort(t1)
-
 t1
+
+val t2 = Array.tabulate(10)(_ => Random.nextInt(20))
+quicksort(t2)
+t2
+
