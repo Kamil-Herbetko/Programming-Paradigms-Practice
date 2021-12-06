@@ -4,7 +4,7 @@ type 'a t = {mutable f: int; mutable r: int; mutable a: 'a option array}
 exception Empty of string
 exception Full of string
 
-let empty n = {f = 0; r = 0; a = Array.make n None}
+let empty n = {f = 0; r = 0; a = Array.make (n + 1) None}
 
 let enqueue(e, q) = begin if ((q.r + 1) mod (Array.length q.a)) = q.f then
                             raise (Full "module QueueMut: operation enqueue applied to a full queue")
