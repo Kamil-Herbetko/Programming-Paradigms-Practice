@@ -39,8 +39,9 @@ while not !quit do
     match !choice with
     1 ->
 	  begin
-	    print_string "Created new, empty queue";
-	    q := QueueMut.empty(10);
+	    print_string "New queue size = ";
+	    q := QueueMut.empty(read_int());
+	    print_string "\n Created new, empty queue";
 	  end
       | 2 ->
 	  begin
