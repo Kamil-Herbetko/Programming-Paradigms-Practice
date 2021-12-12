@@ -15,7 +15,7 @@ let enqueue(e, q) = begin if ((q.r + 1) mod (Array.length q.a)) = q.f then
 	                        end;
                     end
 let dequeue q = begin if q.f = q.r then ()
-                    else q.f <- q.f + 1
+                    else q.f <- (q.f + 1) mod (Array.length q.a)
                 end
 
 let first q = begin if q.f = q.r then raise (Empty "module QueueMut: operation first applied to an empty queue")
