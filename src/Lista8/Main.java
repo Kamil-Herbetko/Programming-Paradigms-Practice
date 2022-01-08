@@ -1,4 +1,5 @@
-package Lista8;// Kamil Herbetko
+package Lista8;
+// Kamil Herbetko
 // Zadanie 1
 import Lista8.Exceptions.EmptyException;
 import Lista8.Exceptions.FullException;
