@@ -64,6 +64,30 @@ def metoda3() = throw new Exception("Wyjątek zgłoszony w metoda3")
 
 object Main:
   def main(args: Array[String]): Unit =
+//    var time0: Time = Time(-10)
+//    var time: Time = Time(10)
+//    println(time0.hour)
+//    println(time.hour)
+//    time.hour = -10
+//    println(time.hour)
+
+//    var time0: Time = Time(25, 58)
+//    var time1: Time = Time(12, -5)
+    var time2: Time = Time(12, 50)
+    println(time2.hour)
+    println(time2.minute)
+    println(time2.before(new Time(12, 51)))
+    println(time2.before(new Time(11, 55)))
+    time2.hour = 13
+    time2.minute = 13
+    println(time2.hour)
+    println(time2.minute)
+
+    var pojazd0: Pojazd = Pojazd("Opel", "Astra")
+    var pojazd1: Pojazd = Pojazd("Ford", "Focus", 1999)
+    var pojazd2: Pojazd = Pojazd("Honda", "Civic", "KomuSieTakChciałoRobić")
+    var pojazd3: Pojazd = Pojazd("Chevrolet", "Camaro", 2009, "Bumblebee")
+
     try
       metoda1()
     catch
