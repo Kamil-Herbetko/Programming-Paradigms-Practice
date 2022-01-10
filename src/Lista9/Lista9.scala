@@ -27,7 +27,7 @@ package Lista9
 //  def hour: Int = h
 //
 //  def minute_=(newMinute: Int) =
-//    require(0 <= min && min < 60, "Minute should be a number between 0 and 59!")
+//    require(0 <= newMinute && newMinute < 60, "Minute should be a number between 0 and 59!")
 //    min = newMinute
 //
 //  def minute: Int = min
@@ -93,4 +93,5 @@ object Main:
     catch
       case e: Exception =>
         System.err.println(e.getMessage() + "\n")
+        
         e.printStackTrace()
